@@ -1,4 +1,4 @@
-# Mastering REST APIs with FastAPI: Social Media API
+# REST APIs with FastAPI: Social Media API
 
 ## Project Overview
 
