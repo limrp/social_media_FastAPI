@@ -29,6 +29,16 @@ async def create_post(post: UserPostIn):
 
 
 # To get a list of all the available
+@app.get("/post", response_model=list[UserPost])
+async def get_all_posts():
+    return list(post_table.values())
+
+
+# response_model=list[UserPost] means that
+# we are going to respond with a list that is going to content UserPost
+# Pydantic and FastAPI are gonna make sure that
+# everything that we return here will get converted to JSON correctly
+
 
 # to-do
 # print post_table in jn
