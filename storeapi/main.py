@@ -35,7 +35,7 @@ async def get_all_posts():
 
 
 # response_model=list[UserPost] means that
-# we are going to respond with a list that is going to content UserPost
+# we are going to respond with a list that is going to content UserPosts
 # Pydantic and FastAPI are gonna make sure that
 # everything that we return here will get converted to JSON correctly
 
