@@ -1,16 +1,7 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
+from storeapi.models.post import UserPost, UserPostIn
 
 app = FastAPI()
-
-
-# Models to validate incoming data
-class UserPostIn(BaseModel):
-    body: str
-
-
-class UserPost(UserPostIn):
-    id: int
 
 
 # Database
@@ -28,7 +19,7 @@ async def create_post(post: UserPostIn):
     # Needs to respond with the body and id = new_post
 
 
-# To get a list of all the available
+# To get a list of all the available posts
 @app.get("/post", response_model=list[UserPost])
 async def get_all_posts():
     return list(post_table.values())
