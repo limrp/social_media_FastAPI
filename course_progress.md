@@ -1,16 +1,18 @@
 # Course
 
-## Section 2, p10
+## Section 2: Working with FastAPI
+
+### Section 2, p10
 
 `response_model=list[UserPost]` means that we are going to respond with a list that is going to content `UserPosts`.
 
 `Pydantic` and `FastAPI` are gonna make sure that everything that we return here will get converted to JSON correctly.
 
-## Section 2, p13
+### Section 2, p13
 
-**Goal**: Split the API (`main.py`) into files with `APIRouter`.
+**Topic**: Split the API (`main.py`) into files with `APIRouter`.
 
-**Main topic:** How to use an `APIRouter`
+**Goal:** How to use an `APIRouter`
 
 After creating `routers/post.py` and moving the **endpoints** there, we:
 
@@ -28,6 +30,46 @@ In `main.py`, we:
 
 With the last action, we are using the `router` that was created in `routers/post.py` and including it in the `app`.
 
-## Section 2, p14
+### Section 2, p14
 
-**Goal**: Adding comments to the social media app.
+**Topic**: Adding comments to the social media app.
+
+**Goal**: How to add a new feature to an API.
+
+*Thought process* to add a new feature to an API:
+
+1. What data does you API receive and return? 
+(i.e. What data does **the user** is going to send **you** and what data are you going to send back?)
+2. What data do you need to store?
+3. Write the interface with the user = the endpoints.
+
+**Answers**
+
+**1A. What data does the user is going to send you?**
+
+This is refering to the **data coming in send by the user**. The user is going to send us:
+
+* The comment's body and 
+* the **post' id**: That's how we are going to **relate comments to posts**!
+
+**1B. What data are you going to send back (return)?**
+
+When we respond, we are going to send them:
+
+    1. the comment's body
+    2. the post's id that it (the comment) is related to
+    3. A unique identifier for each individual comment!
+
+**First:** 
+
+* The `storeapi/models/post.py` script is where our models are.
+* We add the required models to deal with data coming in and out of our API in the `storeapi/models/post.py` script:
+    * `CommentIn(BaseModel)`: For the **data coming in send by the user**: The comment and the post' id. 
+    * `Comment(CommentIn)`: this is going to add a unique identifier for each individial comment.
+
+
+**Important**
+
+* What is the difference between an endpoint and a route?
+
+## Section 3: Introduction to `pytest`
