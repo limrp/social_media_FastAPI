@@ -4,6 +4,13 @@
 
 ### Section 2, p10
 
+* We add the required models
+    * `UserPostIn`: That's going to have:
+        * The post's body.
+    * `UserPost`: That is going to have:
+        * The post's **ID**.
+        * The post's **body** (inherited from `UserPostIn`).
+
 `response_model=list[UserPost]` means that we are going to respond with a list that is going to content `UserPosts`.
 
 `Pydantic` and `FastAPI` are gonna make sure that everything that we return here will get converted to JSON correctly.
@@ -49,8 +56,8 @@ With the last action, we are using the `router` that was created in `routers/pos
 
 This is refering to the **data coming in send by the user**. The user is going to send us:
 
-* The comment's body and 
 * the **post' id**: That's how we are going to **relate comments to posts**!
+* The comment's **body**
 
 **1B. What data are you going to send back (return)?**
 
@@ -66,16 +73,23 @@ Let's create those classes!
 
 * The `storeapi/models/post.py` script is where our models are.
 * We add the required models to deal with data coming in and out of our API in the `storeapi/models/post.py` script:
-    * `CommentIn(BaseModel)`: For the **data coming in send by the user**: The comment and the post' id. 
+    * `CommentIn(BaseModel)`: For the **data coming in send by the user**: 
+        * The post' ID.
+        * The comment's body.
     * `Comment(CommentIn)`: this is going to add a unique identifier for each individial comment. So each comment will have:
-        * The comment's body
-        * The post's ID
         * The unique identifier for the comment.
+        * The post's ID (inherited from `CommentIn`).
+        * The comment's body (inherited from `CommentIn`).
     * `UserPostWithComments(BaseModel)`: This will have:
-        * The post: `UserPost`
+        * The post: `UserPost` that is going to have the post's ID and the inherited post's body.
         * The coments: `list[Comment]` a list of comments.
-        - This is an example of how we can nest models within other models.
-        
+        * This is an example of how we can nest models within other models.
+        * `{"post": {"id": 0, "body": "My post!"}, 
+            "comments": [{"id": 2, "post_id": 0, "body": "A comment of post 0"}, 
+                         {"id": 3, "post_id": 0, "body": "Other comment of post 0"},
+                        ]
+            }`
+
 **Important**
 
 * `UserPostWithComments(BaseModel)` is an example of how we can nest models within other models.
