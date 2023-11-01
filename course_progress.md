@@ -60,16 +60,25 @@ When we respond, we are going to send them:
     2. the post's id that it (the comment) is related to
     3. A unique identifier for each individual comment!
 
+Let's create those classes!
+
 **First:** 
 
 * The `storeapi/models/post.py` script is where our models are.
 * We add the required models to deal with data coming in and out of our API in the `storeapi/models/post.py` script:
     * `CommentIn(BaseModel)`: For the **data coming in send by the user**: The comment and the post' id. 
-    * `Comment(CommentIn)`: this is going to add a unique identifier for each individial comment.
-
-
+    * `Comment(CommentIn)`: this is going to add a unique identifier for each individial comment. So each comment will have:
+        * The comment's body
+        * The post's ID
+        * The unique identifier for the comment.
+    * `UserPostWithComments(BaseModel)`: This will have:
+        * The post: `UserPost`
+        * The coments: `list[Comment]` a list of comments.
+        - This is an example of how we can nest models within other models.
+        
 **Important**
 
+* `UserPostWithComments(BaseModel)` is an example of how we can nest models within other models.
 * What is the difference between an endpoint and a route?
 
 ## Section 3: Introduction to `pytest`
