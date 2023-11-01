@@ -84,12 +84,12 @@ Let's create those classes!
         * The post: `UserPost` that is going to have the post's ID and the inherited post's body.
         * The coments: `list[Comment]` a list of comments.
         * This is an example of how we can nest models within other models.
+        * Example of a response of `UserPostWithComments(BaseModel)`:
         ```python
         {"post": {"id": 0, "body": "My post!"}, 
-            "comments": [{"id": 2, "post_id": 0, "body": "A comment of post 0"}, 
-                         {"id": 3, "post_id": 0, "body": "Other comment of post 0"},
-                        ]
-                        
+         "comments": [{"id": 2, "post_id": 0, "body": "A comment of post 0"}, 
+                      {"id": 3, "post_id": 0, "body": "Other comment of post 0"},
+                     ]             
         }
         ```
 
