@@ -34,6 +34,7 @@ class Comment(CommentIn):
 # Adding a class for a UserPost together with its comments
 # We are going to respond with this to the user in some endpoint
 class UserPostWithComments(BaseModel):
+    # 2 keys
     post: UserPost
     comments: list[Comment]
 
