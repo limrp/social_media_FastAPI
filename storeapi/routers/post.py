@@ -19,8 +19,7 @@ def find_post(post_id: int):
     return post_table.get(post_id)
 
 
-# Creating post endpoint
-# Adding endpoint to create new posts
+# Endpoint to create new posts
 @router.post("/post", response_model=UserPost, status_code=201)
 async def create_post(post: UserPostIn):
     data = post.model_dump()
@@ -31,13 +30,13 @@ async def create_post(post: UserPostIn):
     # Needs to respond with the body and id = new_post
 
 
-# To get a list of all the available posts
+# Endpoint to get a list of all the available posts
 @router.get("/post", response_model=list[UserPost])
 async def get_all_posts():
     return list(post_table.values())
 
 
-# Adding endpoint to create new comments
+# Endpoint to create new comments
 @router.post("/comment", response_model=Comment, status_code=201)
 async def create_comment(comment: CommentIn):
     # To make sure the post for which this comment is being created actually exist:
@@ -56,7 +55,7 @@ async def create_comment(comment: CommentIn):
     # Needs to respond with the id, post_id and body = new_comment
 
 
-# Adding endpoint to get all the comments on a given post
+# Endpoint to get all the comments on a given post
 # This endpoint will receive the post's id
 # and will respond with a list of comments.
 @router.get("/post/{post_id}/comment", response_model=list[Comment])
@@ -66,6 +65,7 @@ async def get_comments_on_post(post_id: int):
     ]
 
 
+# Endpoint to get a post with the list of comments
 @router.get("/post/{post_id}", response_model=UserPostWithComments)
 async def get_post_with_comments(post_id: int):
     post = find_post(post_id)
